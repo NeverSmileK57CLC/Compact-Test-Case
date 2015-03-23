@@ -23,8 +23,11 @@ Tìm những điểm chung của các test case từ đó sinh ra các keyword l
 - Các keyword được đưa vào một danh sách gọi là list_define_keyword với mỗi phần từ là một keyword, mỗi keyword là chứa một danh sách các command. Ví dụ: keyword = [[['    click    id=name', '    click    id=birthday']], []]
 
 <h2>Tính độ phổ biến cho mỗi keyword:</h2> Với mỗi keyword ta so sánh với tất cả các test case, nếu "giống nhau" thì tăng biến đếm cho keyword đó. Việc kiểm tra sự giống nhau của keyword với test case phụ thuộc vào một số tiêu chí:
-- Định nghĩa một mức khác nhau tối đa MAX_ARGUMENT
+
+- Định nghĩa một mức khác nhau tối đa MAX_ARGUMENT.
+- 
 - Hai command nếu khác nhau về phần lệnh thì coi như là khác nhau, còn khác nhau về phần value thì đếm số lần khác nhau về value đó.
+- 
 - Giá trị được lưu trong mảng variable_in_a_keyword là tập hợp tất cả các argument khác nhau của keyword so với test case. Ví dụ: variable_in_a_keyword[0] = [[[5, 7], [9, 11], 6], []] tức là có 1 list argument có 6 lần trùng và có 2 argument là word ở vị trí thứ 5 và vị trí số 9 trong keyword, con 7 và 11 lần lượt là vị trí của argument đó trong test case (cái này giúp ích cho việc thay thế sau này).
 - Nếu tổng số lần khác nhau của các command tương ứng giữa keyword và test case nhỏ hơn MAX_ARGUMENT thì coi như keyword đó "giống nhau" với test case và tăng biến đếm cho keyword đó.
 
