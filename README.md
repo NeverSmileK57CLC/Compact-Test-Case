@@ -1,5 +1,6 @@
 # Compact-Test-Case
 Tìm những điểm chung của các test case từ đó sinh ra các keyword làm cho độ dài của test case ngắn lại.
+Chương trình này có thể thực hiện sau chương trình convert các test case từ format html của SeleniumIDE sang format của RobotFramework https://github.com/NeverSmileK57CLC/Se-IDE-format-to-Robot-Framework
 
 <h2>Các khái niệm:</h2>
 - **Command**: là một câu lệnh ở trong một test, một test thì bao gồm nhiều command. Ví dụ: click id="name".
@@ -30,3 +31,18 @@ Với mỗi keyword ta so sánh với tất cả các test case, nếu "giống 
 * Nếu tổng số lần khác nhau của các command tương ứng giữa keyword và test case nhỏ hơn MAX_ARGUMENT thì coi như keyword đó "giống nhau" với test case và tăng biến đếm cho keyword đó.
 
 <h2>Chọn keyword phổ biến nhất và thực hiện việc thay thế:</h2>
+Việc thay thế thực hiện ngay trên list_test.
+* Duyệt list list_word_variable chứa tất cả các thành phần variable_in_a_keyword của mỗi test case, chọn ra phần tử phổ biến nhất (trong bài là chọn keyword giống nhau với các test case nhiều nhất).
+* Ghi tên keyword vào 1 file resource.txt với nội dung: tên keyword do người dùng nhập, danh sách argument được lấy từ mảng list_word_varialbe (chỉ cần đếm số argument sau đó mặc định tên argument là value1, value2,...), keyword được thay thế các argument bằng value1, value2 (vị trí của value1, value2 được xác định ở trong list_word_variable là word thư 5 và 7 như ví dụ trên)
+Ví dụ: # Ví dụ keyword
+* Thay thế keyword đó vào trong test case:
+	* Xóa các command của test case giống với keyword đó (phải xác định vị trí đầu tiên của keyword trong test case, ở đây chính là hàng tiếp theo của word ở vị trí thứ 7 - 5, tức là khoảng cách của vị trí argument trong keyword và vị trí argument trong test case), chúng ta sẽ xóa n dòng với n là số command của keyword.
+	* Tiến hành thêm tên keyword và argument vào, với argument được lấy từ vị trí thứ 7, 11 như ví dụ trên, chính là vị trí của argument trong test case.
+
+<h2>Ghi các test case có trong list test vào file</h2>
+Ghi với format Ver2_Tenfile.txt vào 1 thư mục Solution2 cùng thư mục cha với Solution.
+* Lúc đọc file ở phía trên thì tiến hành cho vào 1 list header_filename_numtest lưu các thông số của một test case là giá trị của header bao gồm *** Settings ***, *** Variables ***, *** Test Cases ***; tên của file; số lượng test case có trong file đó.
+* Kết hợp header_filename_numtest và list_test tiến hành ghi vào file. 
+	* Tạo ra file với tên filename trong thư mục Solution2.
+	* Ghi header vào trong file đó.
+	* Ghi ra đúng numtest test case trong list_test.
